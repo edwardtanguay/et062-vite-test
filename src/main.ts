@@ -1,29 +1,33 @@
 
-import employees from '../employees.json';
-
-interface IUser {
-	firstName: string;
-	lastName: string;
-	age: number
-}
-
-const changeProperty = <T extends keyof IUser>(user: IUser, prop: T, value: IUser[T]) => {
-	user[prop] = value;
-}
-
-const user: IUser = {
-	firstName: 'Hans',
-	lastName: 'Lefèbvre',
-	age: 23
+const add = (a: number, b: number) => {
+  return a + b;
 };
 
+const subtract = (a: number, b: number) => {
+  return a - b;
+};
 
-console.log(user);
-changeProperty(user, "firstName", "Georg");
-console.log(user);
+const divide = (a: number, b: number) => {
+  return a / b;
+};
+
+const multiply = (a: number, b: number) => {
+  return a * b;
+};
+
+const funcs = [add, subtract, divide, multiply];
+
+const processNumbers = (a:number, b:number, func: (a:number, b:number) => number) => {
+  return func(a, b);
+}
+
+const results = [];
+for (const func of funcs) {
+  results.push(processNumbers(4, 1, func));
+}
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-<div>There are ${employees.length} employees.</div>
+<div>Processed numbers are: ${results.join(', ')}</div>
 `
 
 
